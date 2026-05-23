@@ -6,7 +6,290 @@
     <title>Document</title>
 </head>
 <body>
-   Rafa bumbu
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mural Social</title>
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    body {
+      background: #0f172a;
+    }
+
+    .glass {
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(12px);
+    }
+  </style>
+</head>
+
+<body class="text-white min-h-screen">
+
+  <!-- Header -->
+  <header class="border-b border-white/10 bg-slate-900/70 backdrop-blur-md sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+      <h1 class="text-2xl font-bold text-cyan-400">
+        Mural Social
+      </h1>
+
+      <button
+        id="openModal"
+        class="bg-cyan-500 hover:bg-cyan-400 transition px-5 py-2 rounded-xl font-semibold text-slate-900"
+      >
+        Nova Postagem
+      </button>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main class="max-w-6xl mx-auto px-4 py-8">
+
+    <!-- Feed -->
+    <section id="postsContainer" class="grid gap-8">
+
+      <!-- Postagem Exemplo -->
+      <article class="glass rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
+        <img
+          src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1400&auto=format&fit=crop"
+          class="w-full h-80 object-cover"
+          alt="Imagem"
+        />
+
+        <div class="p-6">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-12 h-12 rounded-full bg-cyan-500 flex items-center justify-center text-xl font-bold">
+              U
+            </div>
+
+            <div>
+              <h2 class="font-bold text-lg">Usuário Demo</h2>
+              <p class="text-sm text-gray-400">Publicado agora</p>
+            </div>
+          </div>
+
+          <h3 class="text-3xl font-bold mb-3">
+            Primeira postagem
+          </h3>
+
+          <p class="text-gray-300 leading-relaxed">
+            Este é um exemplo de postagem no mural social.
+            Você pode adicionar títulos, descrições,
+            imagens e vídeos.
+          </p>
+        </div>
+      </article>
+
+    </section>
+  </main>
+
+  <!-- Modal -->
+  <div
+    id="modal"
+    class="fixed inset-0 bg-black/70 hidden items-center justify-center p-4 z-50"
+  >
+    <div class="glass w-full max-w-2xl rounded-3xl border border-white/10 p-6">
+
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="text-2xl font-bold">
+          Nova Postagem
+        </h2>
+
+        <button
+          id="closeModal"
+          class="text-gray-400 hover:text-white text-2xl"
+        >
+          ✕
+        </button>
+      </div>
+
+      <form id="postForm" class="space-y-5">
+
+        <!-- Nome -->
+        <div>
+          <label class="block mb-2 text-sm text-gray-300">
+            Nome do usuário
+          </label>
+
+          <input
+            type="text"
+            id="username"
+            required
+            class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 outline-none focus:border-cyan-400"
+            placeholder="Digite seu nome"
+          />
+        </div>
+
+        <!-- Título -->
+        <div>
+          <label class="block mb-2 text-sm text-gray-300">
+            Título
+          </label>
+
+          <input
+            type="text"
+            id="title"
+            required
+            class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 outline-none focus:border-cyan-400"
+            placeholder="Título da postagem"
+          />
+        </div>
+
+        <!-- Descrição -->
+        <div>
+          <label class="block mb-2 text-sm text-gray-300">
+            Descrição
+          </label>
+
+          <textarea
+            id="description"
+            rows="5"
+            required
+            class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 outline-none focus:border-cyan-400"
+            placeholder="Escreva algo..."
+          ></textarea>
+        </div>
+
+        <!-- Imagem -->
+        <div>
+          <label class="block mb-2 text-sm text-gray-300">
+            URL da imagem
+          </label>
+
+          <input
+            type="url"
+            id="image"
+            class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 outline-none focus:border-cyan-400"
+            placeholder="https://..."
+          />
+        </div>
+
+        <!-- Vídeo -->
+        <div>
+          <label class="block mb-2 text-sm text-gray-300">
+            URL do vídeo
+          </label>
+
+          <input
+            type="url"
+            id="video"
+            class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 outline-none focus:border-cyan-400"
+            placeholder="https://..."
+          />
+        </div>
+
+        <!-- Botão -->
+        <button
+          type="submit"
+          class="w-full bg-cyan-500 hover:bg-cyan-400 transition text-slate-900 font-bold py-3 rounded-xl"
+        >
+          Publicar
+        </button>
+
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const modal = document.getElementById("modal");
+    const openModal = document.getElementById("openModal");
+    const closeModal = document.getElementById("closeModal");
+    const form = document.getElementById("postForm");
+    const postsContainer = document.getElementById("postsContainer");
+
+    // Abrir modal
+    openModal.addEventListener("click", () => {
+      modal.classList.remove("hidden");
+      modal.classList.add("flex");
+    });
+
+    // Fechar modal
+    closeModal.addEventListener("click", () => {
+      modal.classList.add("hidden");
+      modal.classList.remove("flex");
+    });
+
+    // Criar postagem
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const username = document.getElementById("username").value;
+      const title = document.getElementById("title").value;
+      const description = document.getElementById("description").value;
+      const image = document.getElementById("image").value;
+      const video = document.getElementById("video").value;
+
+      const article = document.createElement("article");
+      article.className =
+        "glass rounded-3xl overflow-hidden border border-white/10 shadow-2xl";
+
+      let mediaContent = "";
+
+      if (image) {
+        mediaContent += `
+          <img
+            src="${image}"
+            class="w-full max-h-[500px] object-cover"
+            alt="Imagem da postagem"
+          />
+        `;
+      }
+
+      if (video) {
+        mediaContent += `
+          <video
+            controls
+            class="w-full bg-black"
+          >
+            <source src="${video}" type="video/mp4">
+            Seu navegador não suporta vídeo.
+          </video>
+        `;
+      }
+
+      article.innerHTML = `
+        ${mediaContent}
+
+        <div class="p-6">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-12 h-12 rounded-full bg-cyan-500 flex items-center justify-center text-xl font-bold">
+              ${username.charAt(0).toUpperCase()}
+            </div>
+
+            <div>
+              <h2 class="font-bold text-lg">${username}</h2>
+              <p class="text-sm text-gray-400">
+                Publicado agora
+              </p>
+            </div>
+          </div>
+
+          <h3 class="text-3xl font-bold mb-3">
+            ${title}
+          </h3>
+
+          <p class="text-gray-300 leading-relaxed whitespace-pre-line">
+            ${description}
+          </p>
+        </div>
+      `;
+
+      postsContainer.prepend(article);
+
+      form.reset();
+
+      modal.classList.add("hidden");
+      modal.classList.remove("flex");
+    });
+  </script>
 
 </body>
+</html>    
+
+</body>
+ sister ardu
 </html>
