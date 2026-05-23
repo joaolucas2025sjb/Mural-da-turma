@@ -1,314 +1,361 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mural Social</title>
-
-  <!-- Tailwind CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mural da Turma</title>
 
   <style>
-    body {
-      background: #0f172a;
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family: Arial, sans-serif;
     }
 
-    .glass {
-      background: rgba(255,255,255,0.05);
-      backdrop-filter: blur(12px);
+    body{
+      background:#0a0f1f;
+      color:white;
     }
+
+    /* CABEÇALHO */
+    header{
+      background:#050816;
+      padding:20px;
+      border-bottom:3px solid #1e3a8a;
+      box-shadow:0 0 15px rgba(30,58,138,0.4);
+    }
+
+    header h1{
+      text-align:center;
+      color:#60a5fa;
+      margin-bottom:10px;
+    }
+
+    nav{
+      display:flex;
+      justify-content:center;
+      gap:20px;
+    }
+
+    nav a{
+      text-decoration:none;
+      color:white;
+      transition:0.3s;
+      font-weight:bold;
+    }
+
+    nav a:hover{
+      color:#60a5fa;
+    }
+
+    /* CONTEÚDO */
+    main{
+      width:90%;
+      max-width:1000px;
+      margin:30px auto;
+    }
+
+    section{
+      margin-bottom:30px;
+    }
+
+    /* NOVA POSTAGEM */
+    .nova-postagem{
+      background:#111827;
+      padding:25px;
+      border-radius:15px;
+      border:1px solid #1e3a8a;
+      box-shadow:0 0 15px rgba(30,58,138,0.2);
+    }
+
+    .nova-postagem h2{
+      color:#60a5fa;
+      margin-bottom:15px;
+    }
+
+    textarea{
+      width:100%;
+      min-height:120px;
+      padding:15px;
+      border:none;
+      border-radius:10px;
+      background:#1f2937;
+      color:white;
+      resize:vertical;
+      margin-bottom:15px;
+      outline:none;
+    }
+
+    textarea::placeholder{
+      color:#9ca3af;
+    }
+
+    input[type="file"]{
+      margin-bottom:15px;
+      color:white;
+    }
+
+    button{
+      background:#1e3a8a;
+      color:white;
+      border:none;
+      padding:12px 20px;
+      border-radius:10px;
+      cursor:pointer;
+      transition:0.3s;
+      font-weight:bold;
+    }
+
+    button:hover{
+      background:#2563eb;
+      transform:scale(1.03);
+    }
+
+    /* POSTS */
+    .mural{
+      display:flex;
+      flex-direction:column;
+      gap:25px;
+    }
+
+    .post{
+      background:#111827;
+      padding:20px;
+      border-radius:15px;
+      border-left:5px solid #2563eb;
+      box-shadow:0 0 10px rgba(0,0,0,0.5);
+    }
+
+    .post p{
+      margin-bottom:15px;
+      line-height:1.5;
+    }
+
+    .post img{
+      width:100%;
+      max-height:400px;
+      object-fit:cover;
+      border-radius:10px;
+      margin-bottom:15px;
+    }
+
+    .acoes{
+      display:flex;
+      align-items:center;
+      gap:15px;
+      margin-top:10px;
+    }
+
+    .curtidas{
+      color:#60a5fa;
+      font-weight:bold;
+    }
+
+    /* COMENTÁRIOS */
+    .comentarios{
+      margin-top:20px;
+      padding-top:15px;
+      border-top:1px solid #374151;
+    }
+
+    .comentarios input{
+      width:100%;
+      padding:12px;
+      border:none;
+      border-radius:10px;
+      background:#1f2937;
+      color:white;
+      margin-bottom:10px;
+      outline:none;
+    }
+
+    .comentarios input::placeholder{
+      color:#9ca3af;
+    }
+
+    .comentario-item{
+      background:#1f2937;
+      padding:10px;
+      border-radius:10px;
+      margin-top:10px;
+      border-left:3px solid #2563eb;
+    }
+
+    /* RODAPÉ */
+    footer{
+      background:#050816;
+      padding:20px;
+      text-align:center;
+      border-top:3px solid #1e3a8a;
+      margin-top:40px;
+      color:#9ca3af;
+    }
+
+    /* RESPONSIVO */
+    @media(max-width:700px){
+      nav{
+        flex-direction:column;
+        align-items:center;
+      }
+
+      .acoes{
+        flex-direction:column;
+        align-items:flex-start;
+      }
+    }
+
   </style>
 </head>
 
-<body class="text-white min-h-screen">
+<body>
 
-  <!-- Header -->
-  <header class="border-b border-white/10 bg-slate-900/70 backdrop-blur-md sticky top-0 z-50">
-    <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-      <h1 class="text-2xl font-bold text-cyan-400">
-        Mural Social
-      </h1>
+  <!-- CABEÇALHO -->
+  <header>
+    <h1>💬 Mural da Turma</h1>
 
-      <button
-        id="openModal"
-        class="bg-cyan-500 hover:bg-cyan-400 transition px-5 py-2 rounded-xl font-semibold text-slate-900"
-      >
-        Nova Postagem
-      </button>
-    </div>
+    <nav>
+      <a href="#">Início</a>
+      <a href="#">Avisos</a>
+      <a href="#">Discussões</a>
+      <a href="#">Projetos</a>
+      <a href="#">Contato</a>
+    </nav>
   </header>
 
-  <!-- Main -->
-  <main class="max-w-6xl mx-auto px-4 py-8">
+  <!-- CONTEÚDO -->
+  <main>
 
-    <!-- Feed -->
-    <section id="postsContainer" class="grid gap-8">
+    <!-- ÁREA DE PUBLICAÇÃO -->
+    <section class="nova-postagem">
+      <h2>Criar Publicação</h2>
 
-      <!-- Postagem Exemplo -->
-      <article class="glass rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
-        <img
-          src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1400&auto=format&fit=crop"
-          class="w-full h-80 object-cover"
-          alt="Imagem"
-        />
+      <textarea id="textoPost" placeholder="Compartilhe algo com a turma..."></textarea>
 
-        <div class="p-6">
-          <div class="flex items-center gap-3 mb-4">
-            <div class="w-12 h-12 rounded-full bg-cyan-500 flex items-center justify-center text-xl font-bold">
-              U
-            </div>
+      <input type="file" id="imagemPost" accept="image/*">
 
-            <div>
-              <h2 class="font-bold text-lg">Usuário Demo</h2>
-              <p class="text-sm text-gray-400">Publicado agora</p>
-            </div>
-          </div>
+      <br>
 
-          <h3 class="text-3xl font-bold mb-3">
-            Primeira postagem
-          </h3>
-
-          <p class="text-gray-300 leading-relaxed">
-            Este é um exemplo de postagem no mural social.
-            Você pode adicionar títulos, descrições,
-            imagens e vídeos.
-          </p>
-        </div>
-      </article>
-
+      <button onclick="criarPost()">Publicar</button>
     </section>
+
+    <!-- MURAL -->
+    <section class="mural" id="mural">
+    </section>
+
   </main>
 
-  <!-- Modal -->
-  <div
-    id="modal"
-    class="fixed inset-0 bg-black/70 hidden items-center justify-center p-4 z-50"
-  >
-    <div class="glass w-full max-w-2xl rounded-3xl border border-white/10 p-6">
-
-      <div class="flex items-center justify-between mb-6">
-        <h2 class="text-2xl font-bold">
-          Nova Postagem
-        </h2>
-
-        <button
-          id="closeModal"
-          class="text-gray-400 hover:text-white text-2xl"
-        >
-          ✕
-        </button>
-      </div>
-
-      <form id="postForm" class="space-y-5">
-
-        <!-- Nome -->
-        <div>
-          <label class="block mb-2 text-sm text-gray-300">
-            Nome do usuário
-          </label>
-
-          <input
-            type="text"
-            id="username"
-            required
-            class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 outline-none focus:border-cyan-400"
-            placeholder="Digite seu nome"
-          />
-        </div>
-
-        <!-- Título -->
-        <div>
-          <label class="block mb-2 text-sm text-gray-300">
-            Título
-          </label>
-
-          <input
-            type="text"
-            id="title"
-            required
-            class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 outline-none focus:border-cyan-400"
-            placeholder="Título da postagem"
-          />
-        </div>
-
-        <!-- Descrição -->
-        <div>
-          <label class="block mb-2 text-sm text-gray-300">
-            Descrição
-          </label>
-
-          <textarea
-            id="description"
-            rows="5"
-            required
-            class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 outline-none focus:border-cyan-400"
-            placeholder="Escreva algo..."
-          ></textarea>
-        </div>
-
-        <!-- Imagem -->
-        <div>
-          <label class="block mb-2 text-sm text-gray-300">
-            URL da imagem
-          </label>
-
-          <input
-            type="url"
-            id="image"
-            class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 outline-none focus:border-cyan-400"
-            placeholder="https://..."
-          />
-        </div>
-
-        <!-- Vídeo -->
-        <div>
-          <label class="block mb-2 text-sm text-gray-300">
-            URL do vídeo
-          </label>
-
-          <input
-            type="url"
-            id="video"
-            class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 outline-none focus:border-cyan-400"
-            placeholder="https://..."
-          />
-        </div>
-
-        <!-- Botão -->
-        <button
-          type="submit"
-          class="w-full bg-cyan-500 hover:bg-cyan-400 transition text-slate-900 font-bold py-3 rounded-xl"
-        >
-          Publicar
-        </button>
-
-      </form>
-    </div>
-  </div>
+  <!-- RODAPÉ -->
+  <footer>
+    <p>© 2026 - Sistema do Mural da Turma</p>
+  </footer>
 
   <script>
-    const modal = document.getElementById("modal");
-    const openModal = document.getElementById("openModal");
-    const closeModal = document.getElementById("closeModal");
-    const form = document.getElementById("postForm");
-    const postsContainer = document.getElementById("postsContainer");
 
-    // Abrir modal
-    openModal.addEventListener("click", () => {
-      modal.classList.remove("hidden");
-      modal.classList.add("flex");
-    });
+    function criarPost(){
 
-    // Fechar modal
-    closeModal.addEventListener("click", () => {
-      modal.classList.add("hidden");
-      modal.classList.remove("flex");
-    });
+      const texto = document.getElementById("textoPost").value;
+      const imagemInput = document.getElementById("imagemPost");
 
-    // Criar postagem
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-
-      const username = document.getElementById("username").value;
-      const title = document.getElementById("title").value;
-      const description = document.getElementById("description").value;
-      const image = document.getElementById("image").value;
-      const video = document.getElementById("video").value;
-
-      const article = document.createElement("article");
-      article.className =
-        "glass rounded-3xl overflow-hidden border border-white/10 shadow-2xl";
-
-      let mediaContent = "";
-
-      if (image) {
-        mediaContent += `
-          <img
-            src="${image}"
-            class="w-full max-h-[500px] object-cover"
-            alt="Imagem da postagem"
-          />
-        `;
+      if(texto.trim() === "" && imagemInput.files.length === 0){
+        alert("Digite algo ou envie uma imagem.");
+        return;
       }
 
-      if (video) {
-        mediaContent += `
-          <video
-            controls
-            class="w-full bg-black"
-          >
-            <source src="${video}" type="video/mp4">
-            Seu navegador não suporta vídeo.
-          </video>
-        `;
+      const mural = document.getElementById("mural");
+
+      // CRIAR POST
+      const post = document.createElement("div");
+      post.classList.add("post");
+
+      // TEXTO
+      const textoPost = document.createElement("p");
+      textoPost.textContent = texto;
+
+      // IMAGEM
+      if(imagemInput.files.length > 0){
+
+        const arquivo = imagemInput.files[0];
+        const leitor = new FileReader();
+
+        leitor.onload = function(e){
+
+          const imagem = document.createElement("img");
+          imagem.src = e.target.result;
+
+          post.appendChild(imagem);
+        }
+
+        leitor.readAsDataURL(arquivo);
       }
 
-      article.innerHTML = `
-        ${mediaContent}
+      post.appendChild(textoPost);
 
-        <div class="p-6">
-          <div class="flex items-center gap-3 mb-4">
-            <div class="w-12 h-12 rounded-full bg-cyan-500 flex items-center justify-center text-xl font-bold">
-              ${username.charAt(0).toUpperCase()}
-            </div>
+      // CURTIDAS
+      let likes = 0;
 
-            <div>
-              <h2 class="font-bold text-lg">${username}</h2>
-              <p class="text-sm text-gray-400">
-                Publicado agora
-              </p>
-            </div>
-          </div>
+      const acoes = document.createElement("div");
+      acoes.classList.add("acoes");
 
-          <h3 class="text-3xl font-bold mb-3">
-            ${title}
-          </h3>
+      const botaoCurtir = document.createElement("button");
+      botaoCurtir.innerHTML = "👍 Curtir";
 
-          <p class="text-gray-300 leading-relaxed whitespace-pre-line">
-            ${description}
-          </p>
-        </div>
-      `;
+      const contador = document.createElement("span");
+      contador.classList.add("curtidas");
+      contador.textContent = likes + " curtidas";
 
-      postsContainer.prepend(article);
+      botaoCurtir.onclick = function(){
+        likes++;
+        contador.textContent = likes + " curtidas";
+      }
 
-      form.reset();
+      acoes.appendChild(botaoCurtir);
+      acoes.appendChild(contador);
 
-      modal.classList.add("hidden");
-      modal.classList.remove("flex");
-    });
+      post.appendChild(acoes);
+
+      // COMENTÁRIOS
+      const comentarios = document.createElement("div");
+      comentarios.classList.add("comentarios");
+
+      const inputComentario = document.createElement("input");
+      inputComentario.placeholder = "Escreva um comentário...";
+
+      const botaoComentar = document.createElement("button");
+      botaoComentar.innerHTML = "Comentar";
+
+      const listaComentarios = document.createElement("div");
+
+      botaoComentar.onclick = function(){
+
+        if(inputComentario.value.trim() !== ""){
+
+          const comentario = document.createElement("div");
+          comentario.classList.add("comentario-item");
+
+          comentario.textContent = inputComentario.value;
+
+          listaComentarios.appendChild(comentario);
+
+          inputComentario.value = "";
+        }
+      }
+
+      comentarios.appendChild(inputComentario);
+      comentarios.appendChild(botaoComentar);
+      comentarios.appendChild(listaComentarios);
+
+      post.appendChild(comentarios);
+
+      // ADICIONAR NO MURAL
+      mural.prepend(post);
+
+      // LIMPAR CAMPOS
+      document.getElementById("textoPost").value = "";
+      document.getElementById("imagemPost").value = "";
+    }
+
   </script>
 
 </body>
-</html>    
-
-</body>
- peso= float(input("Digite seu peso: "))
- altura= float(input("Digite sua altura: "))
-
- imc = peso / (altura **2)
-
- print(f"0 seu imc é:)
-
- if imc < 18:5: 
-  print("Classificação abaixo do peso")
-elif 18.5 <= imc <25:
- print("Classificação peso normal")
-elif 25<= imc < 30:
- print("Classificação acima do peso")
-elif 30<= imc < 35:
- print("Classificação Obesidade grau 1")
-elif 35<= imc < 40:
- print("Classicação Obsidade grau 2")
-else:
- print("Classificação Obesidade grau 3")
-
 </html>
